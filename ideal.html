@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Birthday Surprise ❤️</title>
+
+<style>
+
+/* =========================
+   BASIC PAGE STYLE
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #ff5f9e, #9b59b6, #ff9a9e);
+    min-height: 100vh;
+    overflow-x: hidden;
+    text-align: center;
+}
+
+
+/* =========================
+   MOVING HEARTS
+========================= */
+
+.heart {
+    position: fixed;
+    bottom: -50px;
+    color: #ff1744;
+    font-size: 25px;
+    animation: moveHeart linear forwards;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes moveHeart {
+
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   LOCK SCREEN
+========================= */
+
+#lockScreen {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #ff4081, #7b1fa2);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 100;
+}
+
+.lock-box {
+    width: 90%;
+    max-width: 400px;
+
+    background: white;
+    padding: 35px 25px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.lock-box h1 {
+    color: #ff4081;
+    margin-bottom: 15px;
+}
+
+.lock-box p {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.lock-box input {
+    width: 100%;
+    padding: 14px;
+
+    border: 2px solid #ff4081;
+    border-radius: 12px;
+
+    font-size: 16px;
+    outline: none;
+}
+
+.lock-box button {
+    margin-top: 15px;
+
+    background: #ff4081;
+    color: white;
+
+    border: none;
+    padding: 14px 30px;
+
+    font-size: 16px;
+    border-radius: 30px;
+
+    cursor: pointer;
+}
+
+.lock-box button:hover {
+    background: #e91e63;
+}
+
+#error {
+    margin-top: 15px;
+    color: red;
+}
+
+
+/* =========================
+   MAIN WEBSITE
+========================= */
+
+#mainContent {
+    display: none;
+    position: relative;
+    z-index: 2;
+}
+
+.header {
+    padding: 60px 20px 30px;
+    color: white;
+}
+
+.header h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+    animation: titleMove 2s infinite;
+}
+
+@keyframes titleMove {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+.header p {
+    font-size: 20px;
+}
+
+
+/* =========================
+   BIRTHDAY MESSAGE
+========================= */
+
+.message-box {
+
+    width: 90%;
+    max-width: 700px;
+
+    margin: 20px auto;
+
+    background: rgba(255,255,255,0.95);
+
+    padding: 30px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.message-box h2 {
+    color: #ff4081;
+    margin-bottom: 20px;
+}
+
+.message-box p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #444;
+}
+
+
+/* =========================
+   PHOTO GALLERY - 3 PHOTOS
+========================= */
+
+.gallery {
+    padding: 40px 20px;
+}
+
+.gallery h2 {
+    color: white;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.photos {
+
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    max-width: 1000px;
+    margin: auto;
+}
+
+.photos img {
+
+    width: 280px;
+    height: 350px;
+
+    object-fit: cover;
+
+    border-radius: 20px;
+
+    border: 5px solid white;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+
+    transition: 0.3s;
+}
+
+.photos img:hover {
+    transform: scale(1.05);
+}
+
+
+/* =========================
+   MUSIC BUTTON
+========================= */
+
+.music-button {
+
+    position: fixed;
+
+    bottom: 20px;
+    right: 20px;
+
+    z-index: 50;
+
+    border: none;
+
+    background: white;
+    color: #ff4081;
+
+    padding: 15px 20px;
+
+    border-radius: 30px;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+
+/* =========================
+   FINAL SURPRISE
+========================= */
+
+.surprise-section {
+
+    padding: 50px 20px 80px;
+
+    color: white;
+}
+
+.surprise-section h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.surprise-section p {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.surprise-button {
+
+    border: none;
+
+    background: white;
+    color: #ff4081;
+
+    padding: 15px 35px;
+
+    font-size: 18px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+
+    transition: 0.3s;
+}
+
+.surprise-button:hover {
+    transform: scale(1.1);
+}
+
+
+/* HIDDEN SURPRISE PHOTO */
+
+#surprisePhoto {
+
+    display: none;
+
+    width: 90%;
+    max-width: 400px;
+
+    margin: 30px auto 0;
+
+    border-radius: 25px;
+
+    border: 6px solid white;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+
+    animation: showPhoto 1s ease;
+}
+
+@keyframes showPhoto {
+
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     PASSWORD LOCK SCREEN
+========================= -->
+
+<div id="lockScreen">
+
+    <div class="lock-box">
+
+        <h1>🔐 Birthday Surprise</h1>
+
+        <p>
+            Enter the secret password to open your surprise ❤️
+        </p>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter Password"
+        >
+
+        <button onclick="unlockSurprise()">
+            🔓 Unlock Surprise
+        </button>
+
+        <p id="error"></p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     MAIN WEBSITE
+========================= -->
+
+<div id="mainContent">
+
+
+    <!-- HEADER -->
+
+    <section class="header">
+
+        <h1>🎂 Happy Birthday darling ❤️🫂</h1>
+
+        <p>
+            A special surprise made especially for you 💕
+        </p>
+
+    </section>
+
+
+
+    <!-- BIRTHDAY MESSAGE -->
+
+    <section class="message-box">
+
+        <h2>💌 A Special Message</h2>
+
+        <p>
+
+            Happy Birthday darling 🎉🎂❤️
+            <br><br>
+
+            Wishing you lots of happiness, love,
+            laughter and beautiful memories.
+            <br><br>
+
+            May all your dreams come true
+            and may your life always be filled
+            with happiness and success. ✨
+            <br><br>
+
+            Keep smiling and stay happy always! 😊
+
+        </p>
+
+    </section>
+
+
+
+    <!-- =========================
+         3 PHOTOS
+    ========================= -->
+
+    <section class="gallery">
+
+        
+
+        <div class="photos">
+
+           
+
+            
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         FINAL SURPRISE
+    ========================= -->
+
+    <section class="surprise-section">
+
+        <h2>I wish that your smile stays on your face just like this in this  photo..</h2>
+
+        <p>
+            There is something special waiting for you! 😘🎀
+        </p>
+
+
+        <!-- BUTTON -->
+
+        <button
+            class="surprise-button"
+            onclick="showSurprise()"
+        >
+            🎁 Click For Final Surprise
+        </button>
+
+
+        <!-- HIDDEN PHOTO -->
+
+        <img
+            id="surprisePhoto"
+            src="surprise.jpg"
+            alt="Final Birthday Surprise"
+        >
+
+    </section>
+
+
+</div>
+
+
+
+<!-- =========================
+     BACKGROUND MUSIC
+========================= -->
+
+<audio id="birthdayMusic" loop>
+
+    <source
+        src="music.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+
+<button
+    class="music-button"
+    onclick="toggleMusic()"
+>
+    🎵 Play Music
+</button>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+
+/* =========================
+   UNLOCK PASSWORD
+========================= */
+
+function unlockSurprise() {
+
+    // CHANGE YOUR PASSWORD HERE
+
+    const correctPassword = "love you darling";
+
+
+    const enteredPassword =
+        document.getElementById("password").value;
+
+
+    if (enteredPassword === correctPassword) {
+
+        document.getElementById("lockScreen").style.display = "none";
+
+        document.getElementById("mainContent").style.display = "block";
+
+
+        // START MUSIC AFTER UNLOCK
+
+        document.getElementById("birthdayMusic").play();
+
+
+    } else {
+
+        document.getElementById("error").innerHTML =
+            "❌ Wrong password! HINT:love you darling.";
+
+    }
+}
+
+
+
+/* =========================
+   PLAY / PAUSE MUSIC
+========================= */
+
+const music =
+    document.getElementById("birthdayMusic");
+
+
+function toggleMusic() {
+
+    if (music.paused) {
+
+        music.play();
+
+        document.querySelector(".music-button").innerHTML =
+            "⏸ Pause Music";
+
+    }
+
+    else {
+
+        music.pause();
+
+        document.querySelector(".music-button").innerHTML =
+            "🎵 Play Music";
+
+    }
+
+}
+
+
+
+/* =========================
+   SHOW FINAL SURPRISE PHOTO
+========================= */
+
+function showSurprise() {
+
+    const photo =
+        document.getElementById("surprisePhoto");
+
+
+    photo.style.display = "block";
+
+
+    // CHANGE BUTTON TEXT
+
+    document.querySelector(".surprise-button").innerHTML =
+        "❤️ Surprise Unlocked! ❤️";
+
+
+    // OPTIONAL:
+    // DISABLE BUTTON AFTER CLICK
+
+    document.querySelector(".surprise-button").disabled = true;
+
+}
+
+
+
+/* =========================
+   CREATE MOVING HEARTS
+========================= */
+
+function createHeart() {
+
+    const heart =
+        document.createElement("div");
+
+
+    heart.classList.add("heart");
+
+
+    heart.innerHTML = "💗";
+
+
+    // RANDOM POSITION
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+
+    // RANDOM SIZE
+
+    heart.style.fontSize =
+        Math.random() * 25 + 15 + "px";
+
+
+    // RANDOM SPEED
+
+    heart.style.animationDuration =
+        Math.random() * 4 + 4 + "s";
+
+
+    document.body.appendChild(heart);
+
+
+    // REMOVE HEART AFTER ANIMATION
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 8000);
+
+}
+
+
+// CREATE NEW HEART EVERY 500 MILLISECONDS
+
+setInterval(createHeart, 500);
+
+
+</script>
+
+</body>
+</html>
+    
